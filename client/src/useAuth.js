@@ -2,9 +2,9 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 
 export default function useAuth(code) {
-  const [accessToken, setAccessToken] = useState()
-  const [refreshToken, setRefreshToken] = useState()
-  const [expiresIn, setExpiresIn] = useState()
+  const [ accessToken, setAccessToken ] = useState()
+  const [ refreshToken, setRefreshToken ] = useState()
+  const [ expiresIn, setExpiresIn ] = useState()
 
   useEffect(() => {
     axios
@@ -20,7 +20,7 @@ export default function useAuth(code) {
       .catch(() => {
         window.location = "/"
       })
-  }, [code])
+  }, [ code ])
 
   useEffect(() => {
     if (!refreshToken || !expiresIn) return
@@ -39,7 +39,7 @@ export default function useAuth(code) {
     }, (expiresIn - 60) * 1000)
 
     return () => clearInterval(interval)
-  }, [refreshToken, expiresIn])
+  }, [ refreshToken, expiresIn ])
 
   return accessToken
 }
